@@ -1,0 +1,6 @@
+@article{li2023photomaker,
+  title={PhotoMaker: Customizing Realistic Human Photos via Stacked ID Embedding},
+  author={Li, Zhen and Cao, Mingdeng and Wang, Xintao and Qi, Zhongang and Cheng, Ming-Ming and Shan, Ying},
+  booktitle={arXiv preprint arxiv:2208.12242},
+  year={2022}
+}
