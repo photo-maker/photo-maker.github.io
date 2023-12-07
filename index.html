@@ -25,8 +25,7 @@
   <br>
   <br>
   <img src="./assets/teaser.jpg" class="teaser-gif" style="width:100%;"><br>
-  <h3 style="text-align:center"><em>Let us take/create photos for anyone within 10 seconds</em></h3>
-    <font size="+2">
+  <h3 style="text-align:center"><em>Let us "take"/create photos for anyone <span style="color:red;">within 10 seconds</span>.</em></h3>    <font size="+2">
           <p style="text-align: center;">
             <a href="https://github.com/TencentARC/PhotoMaker" target="_blank">[Paper]</a> &nbsp;&nbsp;&nbsp;&nbsp;
             <a href="https://github.com/TencentARC/PhotoMaker" target="_blank">[Code]</a> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -35,6 +34,10 @@
             <a href="files/bibtex.txt" target="_blank">[BibTeX]</a>
           </p>
     </font>
+    <p style="text-align: center;"> 
+      <!-- We are currently organizing the code and demo to ensure that everyone can enjoy the wonderful journey that PhotoMaker may bring as soon as possible.
+      If you want to support and cheer for us, please star our project. ^_^ -->
+    </p>
 </div>
 <div class="content">
   <h2 style="text-align:center;">Abstract</h2>
@@ -55,8 +58,11 @@
   <img class="summary-img" src="./assets/background.png" style="width:100%;"> <br>
 </div> -->
 <div class="content">
-  <h2>Approach</h2>
-  <p> Our method takes as input a few images (typically 3-5 images suffice, based on our experiments) of a subject (e.g., a specific dog) and the corresponding class name (e.g. "dog"), and returns a fine-tuned/"personalized'' text-to-image model that encodes a unique identifier that refers to the subject. Then, at inference, we can implant the unique identifier in different sentences to synthesize the subjects in difference contexts.</p>
+  <h2>Method</h2>
+  <p> Our method transforms a few input images of the same identity into a stacked ID embedding.
+    This embedding can be regarded as a unified representation of the ID to be generated.
+    During the inference stage, the images constituting the stacked ID embedding can originate from different IDs.
+    We then can synthesize the customized ID in difference contexts.
   <br>
   <img class="summary-img" src="./assets/framework.jpg" style="width:80%;"> <br>
   <p>We first obtain the text embedding and image embeddings from text encoder(s) and image encoder, respectively.
@@ -64,32 +70,42 @@
     Next, we concatenate all fused embeddings along the length dimension to form the <strong>stacked ID embedding</strong>.
     Finally, we feed the stacked ID embedding to all cross-attention layers for adaptively merging the ID content in the diffusion model.
   Note that although we use images of the same ID with the masked background during training, we can directly input images of different IDs without background distortion to create a new ID during inference.</p>
+  <p>
+    We leave the discussions about ID-oriented data construction pipeline in our paper.
+  </p>
   <br>
 </div>
 <div class="content">
   <h2>Recontextualization</h2>
-  <p>Results for re-contextualization of a bag and vase subject instances. By finetuning a model using our method we are able to generate different images of the a subject instance in different environments, with high preservation of subject details and realistic interaction between the scene and the subject. We display the conditioning prompts below each image. </p>
+  <p>We demonstrate the generation capabilities of our PhotoMaker under basic prompts. 
+    We display the conditioning prompts below each image.
+  </p>
   <img class="summary-img" src="./assets/website_recontext.jpg" style="width:100%;">
   <!-- <img class="summary-img" src="./assets/results.png" style="width:100%;"> -->
 </div>
 
 <div class="content">
   <h2>Bringing a person in artwork/old photo into reality</h2>
-  <p>Results for re-contextualization of a bag and vase subject instances. By finetuning a model using our method we are able to generate different images of the a subject instance in different environments, with high preservation of subject details and realistic interaction between the scene and the subject. We display the conditioning prompts below each image. </p>
+  <p>By
+    taking artistic paintings, sculptures, or old photos of a person
+    as input, our PhotoMaker can bring a person from the last century or even ancient times to the present century to
+    “take” photos for them. We display the conditioning prompts below each image. </p>
   <img class="summary-img" src="./assets/website_oldphoto.jpg" style="width:100%;">
   <!-- <img class="summary-img" src="./assets/results.png" style="width:100%;"> -->
 </div>
 
 <div class="content">
   <h2>Stylization</h2>
-  <p>Outfitting a dog with accessories. The identity of the subject is preserved and many different outfits or accessories can be applied to the dog given a prompt of type <em>"a [V] dog wearing a police/chef/witch outfit''</em>. We observe a realistic interaction between the subject dog and the outfits or accessories, as well as a large variety of possible options.</p>
-  <br>
+  <p>Our PhotoMaker not only possesses the capability to generate realistic
+    human photos, but it also allows for stylization while
+    preserving ID attributes. We display the conditioning prompts at the first row.</p>
   <img class="summary-img" src="./assets/stylization.jpg" style="width:100%;"> <br>
 </div>
 
 <div class="content">
   <h2>Changing Age or Gender</h2>
-  <p>Results for re-contextualization of a bag and vase subject instances. By finetuning a model using our method we are able to generate different images of the a subject instance in different environments, with high preservation of subject details and realistic interaction between the scene and the subject. We display the conditioning prompts below each image. </p>
+  <p>By simply replacing class words (e.g., man and woman), our method can achieve changes
+    in gender and age while maintaining the original identity.</p>
   <img class="summary-img" src="./assets/change_age_gender.jpg" style="width:100%;">
   <!-- <img class="summary-img" src="./assets/results.png" style="width:100%;"> -->
 </div>
@@ -97,18 +113,32 @@
 
 <div class="content">
   <h2>Identity Mixing</h2>
-  <p>Original artistic renditions of our subject dog in the style of famous painters. We remark that many of the generated poses were not seen in the training set, such as the Van Gogh and Warhol rendition. We also note that some renditions seem to have novel composition and faithfully imitate the style of the painter - even suggesting some sort of creativity (extrapolation given previous knowledge).</p>
-  <br>
+  <p>If the users provide images of different
+    IDs as input, our PhotoMaker can well integrate the characteristics
+    of different IDs to form a new ID.</p>
   <img class="summary-img" src="./assets/identity_mixing.jpg" style="width:100%;"> <br>
   <br>
-  We can balabala...
+  <p>For identity mixing, our method can adjust the merge ratio by either
+  controlling the percentage of identity images within the input
+  image pool or through the method of prompt weighting.</p>
+  <p>We first show that how our method
+  customizes a new ID by controlling the proportion of different
+  IDs in the input image pool.</p>
   <img class="summary-img" src="./assets/change_mix_ratio_image.jpg" style="width:100%;"> <br>
+  <p>We then multiply the embedding corresponding to the images
+    related to a specific ID by a coefficient to control its proportion
+    of integration into the new ID.</p>
   <img class="summary-img" src="./assets/change_mix_ratio_embed.jpg" style="width:100%;"> <br>
 </div>
 
 <div class="content">
   <h2>Comparisons</h2>
-  <p>We show color modifications in the first row (using prompts ``a [color] [V] car''), and crosses between a specific dog and different animals in the second row (using prompts ``a cross of a [V] dog and a [target species]''). We highlight the fact that our method preserves unique visual features that give the subject its identity or essence, while performing the required property modification.</p>
+  <p>
+    Compared to other methods, our PhotoMaker can simultaneously satisfy high-quality and diverse
+    generation capabilities, promising editability, high inference efficiency, and strong ID fidelity.
+    More comparison results can be found in our paper.
+    We display the conditioning prompts at the second column.
+  </p>
   <br>
   <img class="summary-img" src="./assets/comparison_recontext.jpg" style="width:100%;"> <br>
 </div>
