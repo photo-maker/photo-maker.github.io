@@ -1,0 +1,13 @@
+Hello,
+
+Thank you for your attention.
+
+We are currently organizing the code and demo to ensure that everyone can enjoy the wonderful journey that PhotoMaker may bring as soon as possible.
+
+Code will be available at https://github.com/TencentARC/PhotoMaker.
+
+If you want to support and cheer for us, please star our project. ^_^
+
+Best Regards,
+
+Authors of PhotoMaker
