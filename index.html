@@ -3,8 +3,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>PhotoMaker</title>
 <link href="./files/style.css" rel="stylesheet">
+<link href="./files/button.css" rel="stylesheet">
+<link href="./files/slider.css" rel="stylesheet">
+
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo-180x180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logo-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/logo-16x16.png">
 <script type="text/javascript" src="./files/jquery.mlens-1.0.min.js"></script> 
 <script type="text/javascript" src="./files/jquery.js"></script>
+<script src="./files/util.js" content="text/javascript"></script>
+<link rel="manifest" href="/site.webmanifest">
+<!-- <script src="util.js" content="text/javascript"></script> -->
+
+
 </head>
 
 <body>
@@ -22,14 +33,19 @@
   <div style="text-align: center;">
     <span style="font-size: 14px"><sup>*</sup> Interns in ARC Lab, Tencent PCG  &nbsp;&nbsp;&nbsp;&nbsp;  &#x2709; Corresponding Authors</span>
   </div>
-  <br>
-  <br>
-  <img src="./assets/teaser.jpg" class="teaser-gif" style="width:100%;"><br>
-  <h3 style="text-align:center"><em>Let us "take"/create photos for anyone <span style="color:red;">within 10 seconds</span>.</em></h3>    <font size="+2">
+  <div style="text-align: center;">
+    <video width=80% autoplay muted loop controls>
+      <source src="assets\photomaker_demo.mp4" type="video/mp4">
+    </video>
+    <br>
+    Note: The prompt displayed in the video is a simplified version.
+  </div>
+  <h3 style="text-align:center"><em>Let us create photos/paintings/avatars for <span style="color:rgb(253, 60, 94);">anyone</span> in <span style="color:rgb(241, 73, 177);">any style</span> <span style="color:rgb(84, 151, 233);">within seconds</span>.</em></h3>    <font size="+2">
           <p style="text-align: center;">
-            <a href="https://arxiv.org/abs/2312.04461" target="_blank">[Paper]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://huggingface.co/papers/2312.04461" target="_blank">[Paper]</a> &nbsp;&nbsp;&nbsp;&nbsp;
             <a href="https://github.com/TencentARC/PhotoMaker" target="_blank">[Code]</a> &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="files/todo.txt" target="_blank">[Demo]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://huggingface.co/spaces/TencentARC/PhotoMaker" target="_blank">[Demo]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://huggingface.co/TencentARC/PhotoMaker" target="_blank">[Model Card]</a> &nbsp;&nbsp;&nbsp;&nbsp;
 	    <!-- (<font color="#C70039">new!</font>) <a href="https://github.com/TencentARC/PhotoMaker" target="_blank">[Dataset]</a> &nbsp;&nbsp;&nbsp;&nbsp; -->
             <a href="files/bibtex.txt" target="_blank">[BibTeX]</a>
           </p>
@@ -38,7 +54,35 @@
       <!-- We are currently organizing the code and demo to ensure that everyone can enjoy the wonderful journey that PhotoMaker may bring as soon as possible.
       If you want to support and cheer for us, please star our project. ^_^ -->
     </p>
+  </div>
+
+  <div class="content">
+  <h2 style="text-align:center;">Latest Examples</h2>
+  <h3>Stylization</h3>
+  Select to browse the personalization results. The first row is the reference ID image.
+    <div class="realContainer">
+      <div class="real1stCol"><img class="realImage" src="./assets/inputs/lecun.jpg"></div>
+      <div class="real2ndCol"><img class="realImage" src="./assets/inputs/scarlett.jpg"></div>
+      <div class="real3rdCol"><img class="realImage" src="./assets/inputs/qianxi.jpg"></div>
+      <div class="real4thCol"><img class="realImage" src="./assets/inputs/yangmi.jpg"></div>
+      <div class="real5thCol"><img class="realImage" src="./assets/inputs/lenna.png"></div>
+      <div class="real6thCol"><img class="realImage" src="./assets/inputs/newton.jpg"></div>
+      <div class="realResult"><img class="resultImage" src="./assets/results_real/real1stCol.jpg"></div>
+    </div>
+  <h3>Stylization</h3>
+  Select to browse the personalization results. The first row is the reference ID image.
+    <div class="artContainer">
+      <div class="art1stCol"><img class="artImage" src="./assets/inputs/lecun.jpg"></div>
+      <div class="art2ndCol"><img class="artImage" src="./assets/inputs/scarlett.jpg"></div>
+      <div class="art3rdCol"><img class="artImage" src="./assets/inputs/qianxi.jpg"></div>
+      <div class="art4thCol"><img class="artImage" src="./assets/inputs/yangmi.jpg"></div>
+      <div class="art5thCol"><img class="artImage" src="./assets/inputs/lenna.png"></div>
+      <div class="art6thCol"><img class="artImage" src="./assets/inputs/ez.jpg"></div>
+      <div class="artResult"><img class="resultImage" src="./assets/results_art/art1stCol.jpg"></div>
+    </div>
+
 </div>
+
 <div class="content">
   <h2 style="text-align:center;">Abstract</h2>
   <p>Recent advances in text-to-image generation have made remarkable progress in synthesizing realistic human photos conditioned on given text prompts. 
@@ -58,7 +102,7 @@
   <img class="summary-img" src="./assets/background.png" style="width:100%;"> <br>
 </div> -->
 <div class="content">
-  <h2>Method</h2>
+  <h2 style="text-align:center;">Method</h2>
   <p> Our method transforms a few input images of the same identity into a stacked ID embedding.
     This embedding can be regarded as a unified representation of the ID to be generated.
     During the inference stage, the images constituting the stacked ID embedding can originate from different IDs.
@@ -165,5 +209,8 @@
     <!-- Recycling a familiar <a href="https://chail.github.io/latent-composition/">template</a> ;). --> 
   </p>
 </div>
+<script content="text/javascript">initArtSelection(); </script>
+<script content="text/javascript">initRealSelection(); </script>
+
 </body>
 </html>
